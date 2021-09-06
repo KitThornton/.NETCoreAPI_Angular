@@ -1,0 +1,68 @@
+{{diagnostic}}
+
+<div class="container">
+  <form (ngSubmit)="onSubmit(patient)">
+    <div class="row">
+      <fieldset class="col-md-6">
+        <legend>Patient Details</legend>
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="patient.firstName">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="patient.lastName">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <input type="text" class="form-control" id="gender" name="gender" [(ngModel)]="patient.gender">
+        </div>
+        <div class="form-group">
+          <label for="nhsNumber">NHS Number</label>
+          <input type="text" class="form-control" id="nhsNumber" name="nhsNumber" [(ngModel)]="patient.nhsNumber">
+        </div>
+        <div class="form-group">
+          <label for="hospitalNumber">Hospital Number</label>
+          <input type="text" class="form-control" id="hospitalNumber" name="hospitalNumber" [(ngModel)]="patient.hospitalNumber">
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" (ngModelChange)="patient.dateOfBirth = $event" [ngModel]="patient.dateOfBirth | date:'yyyy-MM-dd'">
+        </div>
+        <div class="form-group">
+          <label for="dateOfDeath">Date of Death</label>
+          <input type="date" class="form-control" id="dateOfDeath" name="dateOfDeath" (ngModelChange)="patient.dateOfDeath = $event" [ngModel]="patient.dateOfDeath | date:'yyyy-MM-dd'">
+        </div>
+      </fieldset>
+      <fieldset class="col-md-6">
+        <legend>Patient Address</legend>
+        <div class="form-group">
+          <label for="addressLine1">Address Line 1</label>
+          <input type="text" class="form-control" id="addressLine1" name="addressLine1" [(ngModel)]="patient.addressLine1">
+        </div>
+        <div class="form-group">
+          <label for="addressLine2">Address Line 2</label>
+          <input type="text" class="form-control" id="addressLine2" name="addressLine2" [(ngModel)]="patient.addressLine2">
+        </div>
+        <div class="form-group">
+          <label for="addressLine3">Address Line 3</label>
+          <input type="text" class="form-control" id="addressLine3" name="addressLine3" [(ngModel)]="patient.addressLine3">
+        </div>
+        <div class="form-group">
+          <label for="addressLine4">Address Line 4</label>
+          <input type="text" class="form-control" id="addressLine4" name="addressLine4" [(ngModel)]="patient.addressLine4">
+        </div>
+        <div class="form-group">
+          <label for="postCode">Post Code</label>
+          <input type="text" class="form-control" id="postCode" name="postCode" [(ngModel)]="patient.postCode">
+        </div>
+      </fieldset>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-success float-right ml-2">Submit</button>
+        <a type="button" href="/patients" class="btn btn-outline-dark float-right ml-2">Back</a>
+      </div>
+    </div>
+  </form>
+</div>

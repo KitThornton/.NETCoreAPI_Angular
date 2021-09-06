@@ -1,0 +1,41 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Full Name</th>
+      <th scope="col">Is Palindrome?</th>
+      <th scope="col">Gender</th>
+      <th scope="col">NHS Number</th>
+      <th scope="col">Hospital Number</th>
+      <th scope="col">Date Of Birth</th>
+      <th scope="col">Date Of Death</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <!--      
+    TODO: Step 6
+    Add styles to the Is Palindrome? column.
+
+    When the value is Yes the text colour should be Green.
+    When the value is No the text colour should be Red.
+
+    Note: this project uses Bootstrap v4.x.x but feel free
+    to use your own CSS styles/classes, if you prefer.
+
+    Hint: you may find the following link useful if you are unfamiliar
+    with Angular binding: https://angular.io/guide/binding-syntax
+  -->
+
+    <tr *ngFor="let patient of patients">
+      <td><a href="/patient/{{patient.id}}">{{patient.fullName}}</a></td>
+      <td>{{patient.isPalindrome ? 'Yes' : 'No'}}</td>
+      <td>{{patient.gender}}</td>
+      <td>{{patient.nhsNumber}}</td>
+      <td>{{patient.hospitalNumber}}</td>
+      <td>{{patient.dateOfBirth | date:'dd-MMM-yyyy'}}</td>
+      <td>{{patient.dateOfDeath | date:'dd-MMM-yyyy'}}</td>
+      <td style="white-space: pre">{{patient.getFormattedAddress}}</td>
+    </tr>
+  </tbody>
+</table>
