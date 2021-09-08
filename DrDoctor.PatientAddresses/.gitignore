@@ -24,6 +24,9 @@ Bin/
 obj/
 Obj/
 
+../DrDoctor.UnitTests/bin/
+../DrDoctor.UnitTests/
+
 # Visual Studio 2015 cache/options directory
 .vs/
 
