@@ -13,23 +13,10 @@
   </thead>
   <tbody>
 
-  <!--
-    TODO: Step 6
-    Add styles to the Is Palindrome? column.
-
-    When the value is Yes the text colour should be Green.
-    When the value is No the text colour should be Red.
-
-    Note: this project uses Bootstrap v4.x.x but feel free
-    to use your own CSS styles/classes, if you prefer.
-
-    Hint: you may find the following link useful if you are unfamiliar
-    with Angular binding: https://angular.io/guide/binding-syntax
-  -->
-
+  <!-- TODO: Step 6 -->
     <tr *ngFor="let patient of patients">
       <td><a href="/patient/{{patient.id}}">{{patient.fullName}}</a></td>
-      <td class="{{patient.isPalindrome ? 'palindrome yes' : 'palindrome no'}}">{{patient.isPalindrome ? 'Yes' : 'No'}}</td>
+      <td class="palindrome {{patient.isPalindrome ? 'yes' : 'no'}}">{{patient.isPalindrome ? 'Yes' : 'No'}}</td>
       <td>{{patient.gender}}</td>
       <td>{{patient.nhsNumber}}</td>
       <td>{{patient.hospitalNumber}}</td>

@@ -49,12 +49,15 @@ export class PatientComponent {
     const headers = { 'content-type': 'application/json'}
 
     // Execute O̶r̶d̶e̶r̶ ̶6̶6̶ PUT request to update patient details
-    // Return the updated patient and re-populate form
+    // Return the updated patient and navigate to the list page
     return this
       .http
       .put<IPatient>(this.baseUrl + `api/patients/${id}`, body, {'headers':headers})
       .subscribe(
-        updatedPatient => this.patient = new Patient(updatedPatient),
+        updatedPatient => {
+          this.patient = new Patient(updatedPatient);
+          window.location.href = '/';
+        },
         error => {
           console.error(error);
           throw error
@@ -64,18 +67,3 @@ export class PatientComponent {
 
   patient : Patient = {} as Patient;
 }
-
-
-//
-// Implement the onSubmit() method.
-//
-// Send a request to the endpoint created in Step 3
-// with the updated patient object.
-//
-// If the response is successful then the user
-// should be navigated back to the list page.
-//
-// Feel free to use one of:
-//  1) Angular HTTP Client (https://angular.io/guide/http)
-//  2) Fetch API (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-//  3) Any other suitable method

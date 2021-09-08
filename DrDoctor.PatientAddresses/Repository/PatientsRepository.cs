@@ -136,6 +136,20 @@ namespace DrDoctor.PatientAddresses.Repository
                 AddressLine1 = "90 Main Street",
                 AddressLine2 = "Ilford         ",
                 PostCode = "IG4 8QI"
+            },
+            new Patient
+            {
+                Id = 7,
+                FirstName = "Han",
+                LastName = "Nah",
+                Gender = "Female",
+                NhsNumber = "3112926641",
+                HospitalNumber = "42360407",
+                DateOfBirth = new DateTime(1986, 09, 07),
+                DateOfDeath = null,
+                AddressLine1 = "90 Main Street   ",
+                AddressLine2 = null,
+                PostCode = "IG4 8QI"
             }
         };
 
