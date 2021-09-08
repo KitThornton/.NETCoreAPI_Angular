@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using DrDoctor.PatientAddresses.Controllers;
 using DrDoctor.PatientAddresses.Entities;
 using DrDoctor.PatientAddresses.Repository;
 using Microsoft.AspNetCore.Mvc;
-using NUnit.Mocks;
-using Moq;
 
 namespace DrDoctor.UnitTests
 {
