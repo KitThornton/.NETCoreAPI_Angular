@@ -53,8 +53,8 @@ namespace DrDoctor.UnitTests
             Assert.AreEqual( 63095840, int.Parse(patient.HospitalNumber));
         }
         
-        // Test #3: Ensure that Get for individual patient returns the correct 
-        // details.
+        // Test #3: Ensure that Get call for patient with incorrect id returns a 
+        // NotFound 404 error
         [Test]
         public void Get_WithPatientsInRepo_IncorrectId()
         {
@@ -66,7 +66,6 @@ namespace DrDoctor.UnitTests
             // Act
             var result = controller.Get(id);
             var okResult = result as OkObjectResult;
-            
             
             // Assert. Abort test if there is an OkResult
             Assert.IsNull(okResult);
