@@ -52,55 +52,18 @@ namespace DrDoctor.PatientAddresses.Controllers
         public IActionResult Put(int id, Patient patient)
         {
             // TODO: Step 3
-            // Compare the argument patient to an empty patient
-
-            var dummyPatient = new Patient();
-
-            var test = EqualityComparer<Patient>.Default.Equals(dummyPatient, patient);
-                
+            // Access patient repo and update if a patient matches supplied Id 
+            var patientReturn = _patientRepository.Update(patient);
             
-            if ( PatientNullCheck(patient) )
+            // Return NotFound 404 error if supplied patient does not match entry in repo
+            if ( patientReturn == null )
             {
                 return NotFound();
             }
             
-            var patientReturn = _patientRepository.Update(patient);
-            
+            // Return updated patient
             return Ok(patientReturn);
         }
-
-        private bool PatientNullCheck(Patient patient)
-        {
-            // We need to check if the patient is null
-            // As the If field is int, it will be populated as 
-            var dummyPatient = new Patient();
-
-            if (patient is IComparable)
-            {
-                var compareResult = ((IComparable)patient).CompareTo((IComparable)dummyPatient);    
-            }
-            
-            // var comparer = new ComparePatients();
-            // var comparer = new Comparer(Patient);
-            
-            XmlSerializer xmlSerializer = new XmlSerializer(patient.GetType());
-            var test = "";
-            var test2 = "";
-            using(StringWriter textWriter = new StringWriter())
-            {
-                xmlSerializer.Serialize(textWriter, patient);
-                test = textWriter.ToString();
-            }
-            
-            using(StringWriter textWriter = new StringWriter())
-            {
-                xmlSerializer.Serialize(textWriter, dummyPatient);
-                test2 = textWriter.ToString();
-            }
-            
-            return test == test2;
-        }
-        
     }
 }
 

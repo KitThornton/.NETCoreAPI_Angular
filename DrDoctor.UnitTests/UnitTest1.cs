@@ -44,7 +44,7 @@ namespace DrDoctor.UnitTests
             IPatientsRepository repo = new PatientsRepository();
             var controller = new PatientsController(repo);
             var id = 1;
-
+            
             // act
             var result = controller.Get(id);
             var okResult = result as OkObjectResult;
@@ -57,7 +57,31 @@ namespace DrDoctor.UnitTests
             Assert.AreEqual( 63095840, int.Parse(patient.HospitalNumber));
         }
         
-        // Test #3: Ensure that the Put call accepts the updated patient, processes accordingly
+        // Test #3: Ensure that Get for individual patient returns the correct 
+        // details.
+        [Test]
+        public void Get_WithPatientsInRepo_IncorrectId()
+        {
+            // Arrange
+            IPatientsRepository repo = new PatientsRepository();
+            var controller = new PatientsController(repo);
+            var id = 123345;
+
+            // Act
+            var result = controller.Get(id);
+            var okResult = result as OkObjectResult;
+            
+            
+            // Assert. Abort test if there is an OkResult
+            Assert.IsNull(okResult);
+            
+            // Check the response status code 
+            var notFoundResult = ((NotFoundResult) result);
+            Assert.IsNotNull(notFoundResult);
+            Assert.AreEqual(404, notFoundResult.StatusCode);
+        }
+        
+        // Test #4: Ensure that the Put call accepts the updated patient, processes accordingly
         // and then returns the updated patient that will be displayed on UI
         [Test]
         public void Put_WithPatientsInRepo_ById()
@@ -77,21 +101,21 @@ namespace DrDoctor.UnitTests
             Assert.IsNotNull(okResult);
             Assert.AreEqual(200, okResult.StatusCode);
             Assert.AreEqual( "Bob", returnedPatient.FirstName);
-            // Assert.AreEqual( 1890, returnedPatient.DateOfBirth. );
+            Assert.AreEqual( 1890, returnedPatient.DateOfBirth.Year);
         }
         
-        // Test #4: 
+        // Test #5: Test the Put call when patient of incorrect Id (0) supplied
+        // NotFound result should be returned.
         [Test]
         public void Put_WithIncorrectPatient_ById()
         {
             // Arrange
             IPatientsRepository repo = new PatientsRepository();
             var controller = new PatientsController(repo);
-            var id = 145;
             var patient = new Patient();
             
             // Act
-            var result = controller.Put(id, patient);
+            var result = controller.Put(patient.Id, patient);
             var okResult = result as OkObjectResult;
 
             // Assert. Abort test if there is an OkResult
@@ -101,15 +125,6 @@ namespace DrDoctor.UnitTests
             var notFoundResult = ((NotFoundResult) result);
             Assert.IsNotNull(notFoundResult);
             Assert.AreEqual(404, notFoundResult.StatusCode);
-            
-            
-            
-            // 
-            // var returnedPatient = (Patient) okResult.Value;
-            // if (returnedPatient == null)
-            // {
-            //     Assert.Fail();
-            // }
         }
         
         private Patient PopulateTestPatient(int id)
