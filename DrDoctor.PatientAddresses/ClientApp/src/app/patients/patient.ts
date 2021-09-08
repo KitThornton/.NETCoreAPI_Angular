@@ -50,7 +50,7 @@ export class Patient implements IPatient {
     if ( this.postCode ) { addressLines.push(this.postCode.trim()) }
 
     // For each sanitised and non-null address line, append and add new line
-    let formattedAddress;
+    let formattedAddress = "";
     addressLines.map(e => formattedAddress += e + "\n");
 
     return formattedAddress;

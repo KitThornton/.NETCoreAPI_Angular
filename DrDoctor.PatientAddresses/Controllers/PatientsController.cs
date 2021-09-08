@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using DrDoctor.PatientAddresses.Entities;
 using DrDoctor.PatientAddresses.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -49,7 +52,14 @@ namespace DrDoctor.PatientAddresses.Controllers
         public IActionResult Put(int id, Patient patient)
         {
             // TODO: Step 3
-            if (ReferenceEquals(null, patient ))
+            // Compare the argument patient to an empty patient
+
+            var dummyPatient = new Patient();
+
+            var test = EqualityComparer<Patient>.Default.Equals(dummyPatient, patient);
+                
+            
+            if ( PatientNullCheck(patient) )
             {
                 return NotFound();
             }
@@ -58,6 +68,39 @@ namespace DrDoctor.PatientAddresses.Controllers
             
             return Ok(patientReturn);
         }
+
+        private bool PatientNullCheck(Patient patient)
+        {
+            // We need to check if the patient is null
+            // As the If field is int, it will be populated as 
+            var dummyPatient = new Patient();
+
+            if (patient is IComparable)
+            {
+                var compareResult = ((IComparable)patient).CompareTo((IComparable)dummyPatient);    
+            }
+            
+            // var comparer = new ComparePatients();
+            // var comparer = new Comparer(Patient);
+            
+            XmlSerializer xmlSerializer = new XmlSerializer(patient.GetType());
+            var test = "";
+            var test2 = "";
+            using(StringWriter textWriter = new StringWriter())
+            {
+                xmlSerializer.Serialize(textWriter, patient);
+                test = textWriter.ToString();
+            }
+            
+            using(StringWriter textWriter = new StringWriter())
+            {
+                xmlSerializer.Serialize(textWriter, dummyPatient);
+                test2 = textWriter.ToString();
+            }
+            
+            return test == test2;
+        }
+        
     }
 }
 

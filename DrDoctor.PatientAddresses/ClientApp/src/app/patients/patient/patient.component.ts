@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Patient } from "../patient";
 import { ActivatedRoute, Router } from "@angular/router";
 import { IPatient } from "../ipatient";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'patient',
@@ -28,8 +29,14 @@ export class PatientComponent {
       this
         .http
         .get<IPatient>(this.baseUrl + `api/patients/${id}`)
-        .subscribe(patient => this.patient = new Patient(patient));
-    });
+        .subscribe(
+          patient => this.patient = new Patient(patient),
+          error => {
+            console.error(error);
+            throw error
+          }
+        )
+    })
   }
 
   onSubmit(patient: Patient) {
@@ -46,7 +53,13 @@ export class PatientComponent {
     return this
       .http
       .put<IPatient>(this.baseUrl + `api/patients/${id}`, body, {'headers':headers})
-      .subscribe(updatedPatient => this.patient = new Patient(updatedPatient));
+      .subscribe(
+        updatedPatient => this.patient = new Patient(updatedPatient),
+        error => {
+          console.error(error);
+          throw error
+        }
+      );
   }
 
   patient : Patient = {} as Patient;
