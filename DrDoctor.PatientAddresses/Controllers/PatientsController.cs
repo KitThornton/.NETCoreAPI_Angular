@@ -56,7 +56,7 @@ namespace DrDoctor.PatientAddresses.Controllers
             var patientReturn = _patientRepository.Update(patient);
             
             // Return NotFound 404 error if supplied patient does not match entry in repo
-            if ( patientReturn == null )
+            if ( ReferenceEquals(null, patientReturn) )
             {
                 return NotFound();
             }
